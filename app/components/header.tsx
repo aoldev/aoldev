@@ -64,13 +64,13 @@ export default function Header() {
             </Link>
             <Link
               href="/careers"
-              className="text-black-600 hover:text-primary transition-colors hover:scale-105"
+              className="text-gray-600 hover:text-primary transition-colors hover:scale-105"
             >
               Careers
             </Link>
             <Link
               href="/contact"
-              className="text-black-600 hover:text-primary transition-colors hover:scale-105"
+              className="text-gray-600 hover:text-primary transition-colors hover:scale-105"
             >
               Contact Us
             </Link>

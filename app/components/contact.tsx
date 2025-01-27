@@ -1,6 +1,6 @@
 'use client';
 
-import { Mail, Phone, MapPin, Globe, Linkedin, Github, Twitter } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Github, Twitter } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { countries } from "countries-list";
@@ -15,7 +15,7 @@ export default function ContactPage() {
         {/* Left Form Section */}
         <Card className="bg-gradient-to-br from-purple-50 to-white border-purple-100 shadow-lg">
           <CardHeader>
-            <CardTitle className="text-2xl font-bold">Hello there</CardTitle>
+            <CardTitle className="text-2xl font-bold">Get in touch</CardTitle>
           </CardHeader>
           <CardContent>
             <p className="mb-6 text-gray-600">Want to speak to someone about your startup? We'd love to chat!</p>
@@ -87,8 +87,8 @@ export default function ContactPage() {
               <h2 className="text-xl font-bold text-purple-900">Chat with us</h2>
               <div className="flex items-center">
                 <Mail className="mr-3 text-purple-500" />
-                <a href="mailto:support@aichatbot.com" className="text-purple-700 hover:underline">
-                support@aichatbot.com
+                <a href="mailto:info@company.com" className="text-purple-700 hover:underline">
+                  info@company.com
                 </a>
               </div>
               <div className="flex items-center">
@@ -98,9 +98,9 @@ export default function ContactPage() {
                 </a>
               </div>
               <div className="flex items-center">
-                <Globe className="mr-3 text-purple-500" />
-                <a href="www.aoldev.in" className="text-purple-700 hover:underline">
-                  Visit our website
+                <Mail className="mr-3 text-purple-500" />
+                <a href="#" className="text-purple-700 hover:underline">
+                  Shoot us an email
                 </a>
               </div>
             </div>
@@ -108,14 +108,14 @@ export default function ContactPage() {
               <h2 className="text-xl font-bold text-purple-900">Visit us</h2>
               <div className="flex items-center">
                 <MapPin className="mr-3 text-purple-500" />
-                <p>Headquarters - Hyderabad, IN</p>
+                <p>100 Smith Street, Collingwood VIC 3066</p>
               </div>
             </div>
             <div className="space-y-4">
               <h2 className="text-xl font-bold text-purple-900">Follow us</h2>
               <div className="flex items-center space-x-4">
                 <a
-                  href="https://www.linkedin.com/company/aol-dev/"
+                  href="https://linkedin.com/company/yourcompany"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center text-purple-700 hover:underline"
@@ -124,7 +124,7 @@ export default function ContactPage() {
                   LinkedIn
                 </a>
                 <a
-                  href="https://github.com/aoldev"
+                  href="https://github.com/yourcompany"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center text-purple-700 hover:underline"

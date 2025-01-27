@@ -17,12 +17,10 @@ import {
     Layers,
     ArrowRight,
     CheckCircle,
-    Search,
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
 
 // Career Opportunities Section Data
@@ -179,10 +177,8 @@ const FAQs = [
 ];
 
 
-
 export default function CareersContent() {
     const [activeSection, setActiveSection] = useState({});
-    const [searchQuery, setSearchQuery] = useState('');
     const cultureRef = useRef(null);
     const opportunitiesRef = useRef(null);
     const router = useRouter();
@@ -201,17 +197,6 @@ export default function CareersContent() {
     const scrollToOpportunities = () => {
         opportunitiesRef.current?.scrollIntoView({ behavior: 'smooth' });
     };
-
-    // Filter jobs based on search query
-    const filteredJobs = CareerOpportunities.filter(job => {
-        const searchTerm = searchQuery.toLowerCase();
-        return (
-            job.title.toLowerCase().includes(searchTerm) ||
-            job.description.toLowerCase().includes(searchTerm) ||
-            job.type.toLowerCase().includes(searchTerm) ||
-            job.skills.some(skill => skill.toLowerCase().includes(searchTerm))
-        );
-    });
 
     return (
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -300,61 +285,40 @@ export default function CareersContent() {
             </section>
 
 
-            {/* Career Opportunities with Search Bar */}
+            {/* Career Opportunities */}
             <section ref={opportunitiesRef} className="py-16">
                 <h2 className="text-3xl font-bold mb-8 text-center text-purple-700 flex items-center justify-center">
                     <Briefcase className="inline-block mr-3 text-purple-500" />
                     Current Opportunities
                 </h2>
-
-                {/* Search Bar */}
-                <div className="max-w-md mx-auto mb-8">
-                    <div className="relative">
-                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-                        <Input
-                            type="text"
-                            placeholder="Search by job title, skills, or type..."
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            className="pl-10 w-full border-2 border-purple-200 focus:border-purple-500 rounded-lg"
-                        />
-                    </div>
-                </div>
-
                 <div className="grid md:grid-cols-3 gap-8">
-                    {filteredJobs.length > 0 ? (
-                        filteredJobs.map((job, index) => (
-                            <Card key={index} className="transition-shadow duration-300 ease-in-out hover:shadow-lg">
-                                <CardHeader>
-                                    <CardTitle className="text-xl text-purple-800">{job.title}</CardTitle>
-                                    <p className="text-sm text-gray-500">{job.type}</p>
-                                </CardHeader>
-                                <CardContent>
-                                    <p className="mb-4 text-gray-700">{job.description}</p>
-                                    <div className="flex flex-wrap gap-2 mb-4">
-                                        {job.skills.map((skill, skillIndex) => (
-                                            <span
-                                                key={skillIndex}
-                                                className="bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs"
-                                            >
-                                                {skill}
-                                            </span>
-                                        ))}
-                                    </div>
-                                    <Button
-                                        variant="outline"
-                                        className="w-full border-purple-500 text-purple-700 hover:bg-purple-50 transition-colors duration-200"
-                                    >
-                                        Apply Now
-                                    </Button>
-                                </CardContent>
-                            </Card>
-                        ))
-                    ) : (
-                        <div className="col-span-3 text-center py-8">
-                            <p className="text-gray-500">No jobs match your search criteria.</p>
-                        </div>
-                    )}
+                    {CareerOpportunities.map((job, index) => (
+                        <Card key={index} className="transition-shadow duration-300 ease-in-out hover:shadow-lg">
+                            <CardHeader>
+                                <CardTitle className="text-xl text-purple-800">{job.title}</CardTitle>
+                                <p className="text-sm text-gray-500">{job.type}</p>
+                            </CardHeader>
+                            <CardContent>
+                                <p className="mb-4 text-gray-700">{job.description}</p>
+                                <div className="flex flex-wrap gap-2 mb-4">
+                                    {job.skills.map((skill, skillIndex) => (
+                                        <span
+                                            key={skillIndex}
+                                            className="bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs"
+                                        >
+                                            {skill}
+                                        </span>
+                                    ))}
+                                </div>
+                                <Button
+                                    variant="outline"
+                                    className="w-full border-purple-500 text-purple-700 hover:bg-purple-50 transition-colors duration-200"
+                                >
+                                    Apply Now
+                                </Button>
+                            </CardContent>
+                        </Card>
+                    ))}
                 </div>
             </section>
 

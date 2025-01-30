@@ -18,14 +18,9 @@ export default function Login() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
-    console.log("Login Step 2");
     const success = await login(email, password)
-    console.log("Login Step 3");
     if (!success) {
-      setError('Invalid email or password');
-    }
-    else{
-      console.log("Login Sucess");
+      setError('Invalid email or password')
     }
   }
 

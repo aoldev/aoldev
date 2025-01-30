@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useAuth } from '../hooks/useAuth'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -14,14 +15,12 @@ export default function Signup() {
   const [showPassword, setShowPassword] = useState(false) // State for password visibility
   const [showConfirmPassword, setShowConfirmPassword] = useState(false) // State for confirm password visibility
   const [error, setError] = useState<string>('')
-  const [success, setSuccess] = useState<string>('')
+
+  const { signup } = useAuth()
 
   const handleSubmit = async (e: React.FormEvent) => {
-    console.log("Step 1")
     e.preventDefault()
     setError('')
-    setSuccess('')
-    console.log("Step 2")
     if (password.length < 8) {
       setError('Password must be at least 8 characters long.')
       return
@@ -30,27 +29,9 @@ export default function Signup() {
       setError('Passwords do not match')
       return
     }
-    console.log("Step 3")
-    try {
-      const response = await fetch('/api/auth/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({action: 'signup', email, password }),
-      })
-
-      const result = await response.json()
-      if (response.ok) {
-        setSuccess('Account created successfully!')
-        setEmail('')
-        setPassword('')
-        setConfirmPassword('')
-      } else {
-        setError('User already exists')
-      }
-    } catch (err) {
-      setSuccess('An error occurred. Please try again.')
+    const success = await signup(email, password)
+    if (!success) {
+      setError('Failed to create account')
     }
   }
 
@@ -84,7 +65,7 @@ export default function Signup() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="pr-10"
+                className="pr-10" // Space for the button
               />
               <button
                 type="button"
@@ -107,7 +88,7 @@ export default function Signup() {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
-                className="pr-10"
+                className="pr-10" // Space for the button
               />
               <button
                 type="button"
@@ -120,7 +101,6 @@ export default function Signup() {
             </div>
           </div>
           {error && <p className="text-red-500 text-sm">{error}</p>}
-          {success && <p className="text-green-500 text-sm">{success}</p>}
           <div className="flex flex-col space-y-2 font-bold">
             <Button onClick={() => signIn('google')} type="button" className="w-full flex items-center justify-center bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-md">
               <FaGoogle className="mr-2" /> Sign up with Google
